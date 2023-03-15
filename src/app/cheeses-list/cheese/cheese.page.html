@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/tab/cheeses"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Fromage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="setModif()">Rendre Modifiable</ion-button>
+  <div *ngIf="modif && cheese">
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="takePhoto()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-item>
+      <ion-label>Image</ion-label>
+      <ion-input type="text" [(ngModel)]="cheese.cheeseImg"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="cheese.cheeseImg !== ''">
+      <img src="{{cheese.cheeseImg}}" alt="Ce lien n'est pas bon...">
+    </ion-item>
+    <ion-item>
+      <ion-label>Nom</ion-label>
+      <ion-input type="text" [(ngModel)]="cheese.cheeseName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Lait</ion-label>
+      <ion-input type="text" [(ngModel)]="cheese.milk"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Département</ion-label>
+      <ion-input type="text" [(ngModel)]="cheese.dpt"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Page wikipédia</ion-label>
+      <ion-input type="text" [(ngModel)]="cheese.wiki"></ion-input>
+    </ion-item>
+    <p class="text-center">
+      <ion-button (click)="onModif()">Modifier</ion-button>
+    </p>
+  </div>
+  <div *ngIf="!modif">
+    <ion-grid *ngIf="cheese">
+      <ion-row>
+        <ion-col size="6">
+          <img [src]="cheese.cheeseImg">
+        </ion-col>
+        <ion-col size="6">
+          <strong>Nom</strong> <br>
+          {{cheese.cheeseName}} <br> <br>
+          <strong>Lait</strong> <br>
+          {{cheese.milk}} <br> <br>
+          <strong>Département</strong> <br>
+          {{cheese.dpt}} <br> <br>
+          <a href="{{cheese.wiki}}">Page wikipédia</a> <br>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="onDelete(cheese.id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

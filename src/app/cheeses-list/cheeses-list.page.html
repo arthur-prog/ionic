@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ma bibliothèque</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2>Création d'un nouveau fromage</h2>
+  <ion-button routerLink="/tab/cheeses/new">Création</ion-button>
+  <h2>Liste des fromages</h2>
+
+  <h3>Filtres</h3>
+
+  <ion-row>
+    <ion-col>
+      <h5 class="fa-lg">Lait</h5>
+
+      <div class="form-check mt-3">
+        <input class="form-check-input" type="radio" name="radioMilk" id="inlineRadio4" value="" (change)="onMilkChange($event)">
+        <label class="form-check-label" for="inlineRadio1">Tous</label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="radioMilk" id="inlineRadio1" value="Vache" (change)="onMilkChange($event)">
+        <label class="form-check-label" for="inlineRadio1">Vache</label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="radioMilk" id="inlineRadio2" value="Brebis" (change)="onMilkChange($event)">
+        <label class="form-check-label" for="inlineRadio2">Brebis</label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="radioMilk" id="inlineRadio3" value="Chèvre" (change)="onMilkChange($event)">
+        <label class="form-check-label" for="inlineRadio3">Chèvre</label>
+      </div>
+    </ion-col>
+
+    <ion-col>
+      <h5 class="fa-lg">Département</h5>
+
+      <select class="form-select" aria-label="Default select example" style="width: auto" (change)="onDptChange($event)">
+        <option selected value="">Tous</option>
+        <option *ngFor="let dpt of dptList"  [value]="dpt.dep_name">{{ dpt.dep_name }}</option>
+      </select>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let cheese of cheeses">
+        <ion-list [routerLink]="['/tab/cheeses/', cheese.id]">
+          <div [routerLink]="['/tab/cheeses/', cheese.id]" class="card">
+              <ion-col>
+                <img [src]="cheese.cheeseImg" [alt]="cheese.cheeseName" />
+                <h2 class="card-title">{{cheese.cheeseName}}</h2>
+              </ion-col>
+          </div>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
